@@ -1,3 +1,8 @@
+INCLUDE "game_engine/level_constants.inc"
+INCLUDE "constants.inc"
+INCLUDE "entities/entities.inc"
+INCLUDE "assets/tiles/tiles.inc"
+
 SECTION "Scene address", WRAM0
 
 current_level_info_address: DS 2
@@ -28,16 +33,16 @@ load_level::
 
     ; Load assets
     ;call load_numbers
-    call load_heart_tiles
-    call load_ambar_tile
-    call load_player_tiles
+    ;call load_heart_tiles
+    ;call load_ambar_tile
+    ;call load_player_tiles
     ; call load_cowboy_sprites
-    call load_bullet_sprites
-    call load_frog_tiles
-    call load_fly_tiles
-    call load_butterfly_tiles
-    call load_darkfrog_tiles
-    call load_desintegration_tiles
+    ;call load_bullet_sprites
+    ;call load_frog_tiles
+    ;call load_fly_tiles
+    ;call load_butterfly_tiles
+    ;call load_darkfrog_tiles
+    ;call load_desintegration_tiles
 
     call load_tileset
     call load_level_map
@@ -45,17 +50,17 @@ load_level::
     call init_player
     ; call init_enemigos_prueba
 
-    ld hl, wNumberOfEnemies
-    ld [hl], 0
-    call init_enemies
-    call init_collectibles
-    call init_palettes_by_default
+    ;ld hl, wNumberOfEnemies
+    ;ld [hl], 0
+    ;call init_enemies
+    ;call init_collectibles
+    ;call init_palettes_by_default
 
     ; Load level variables
     ; call init_counterload_level
-    call init_tile_animation        ; Initialize fire animation system
-    call init_hud                   ; Initialize HUD (lives & bullets)
-    call init_hud_score_display ; Initialize and display the score
+    ;call init_tile_animation        ; Initialize fire animation system
+    ;call init_hud                   ; Initialize HUD (lives & bullets)
+    ;call init_hud_score_display ; Initialize and display the score
     
     ; Load music
 	call init_background_music
@@ -246,14 +251,14 @@ correct_entity_position_when_scroll_resets::
     ;; Compensate initial scroll Y
     ld a, b
     ld d, 0
-    ld e, SCENE_STARTING_SCREEN_SCROLL_Y
+    ld e, LEVEL_STARTING_SCREEN_SCROLL_Y
     add hl, de
     sub [hl]
     ld b, a
 
     ;; Compensate initial scroll X
     ld a, c
-    ld e, (SCENE_STARTING_SCREEN_SCROLL_X-SCENE_STARTING_SCREEN_SCROLL_Y)
+    ld e, (LEVEL_STARTING_SCREEN_SCROLL_X-LEVEL_STARTING_SCREEN_SCROLL_Y)
     add hl, de
     sub [hl]
     ld c, a
@@ -296,11 +301,11 @@ init_player::
 set_player_initial_position::
     call get_current_level_info_address ; in hl
     ld d, 0
-    ld e, SCENE_PLAYER_STARTING_Y
+    ld e, LEVEL_PLAYER_STARTING_Y
     add hl, de
     ld b, [hl] ; Y coordinate
 
-    ld e, SCENE_PLAYER_STARTING_X-SCENE_PLAYER_STARTING_Y
+    ld e, LEVEL_PLAYER_STARTING_X-LEVEL_PLAYER_STARTING_Y
     add hl, de
     ld c, [hl]  ; X coordinate
 
@@ -361,7 +366,7 @@ restore_player_position::
     call wait_vblank
     ld hl, correct_entity_position_when_scroll_resets
     call man_entity_for_each
-    call update_hud_if_needed
+    ; call update_hud_if_needed
     call set_initial_scroll
     call set_player_initial_position
     ret
@@ -380,7 +385,7 @@ restore_player_position::
 
 get_next_level_info::
     call get_current_level_info_address ; in hl
-    ld bc, SCENE_NEXT_SCENE
+    ld bc, LEVEL_NEXT_LEVEL
     add hl, bc
     ld a, [hl+]
     ld l, [hl]
@@ -420,7 +425,7 @@ next_level::
 
 init_enemies::
     call get_current_level_info_address ; in hl
-    ld bc, SCENE_ENEMY_SPAWNER
+    ld bc, LEVEL_ENEMY_SPAWNER
     add hl, bc
     ld a, [hl+]
     ld l, [hl]
@@ -441,7 +446,7 @@ init_enemies::
 
 get_current_tilemap_address::
     call get_current_level_info_address ; in hl
-    ld bc, SCENE_TILEMAP
+    ld bc, LEVEL_TILEMAP
     add hl, bc
     ld d, [hl]
     inc l
@@ -463,7 +468,7 @@ get_current_tilemap_address::
 process_level_background_animation::
     call get_current_level_info_address ; in hl
     ld d, 0
-    ld e, SCENE_ANIMATION_ROUTINE
+    ld e, LEVEL_ANIMATION_ROUTINE
     add hl, de
     ld a, [hl+]
     ld l, [hl]
@@ -487,7 +492,7 @@ process_level_background_animation::
 check_next_level_trigger::
     call get_current_level_info_address ; in hl
     ld d, 0
-    ld e, SCENE_NEXT_LEVEL_TRIGGER
+    ld e, LEVEL_NEXT_LEVEL_TRIGGER
     add hl, de
     ld a, [hl+]
     ld l, [hl]
@@ -520,7 +525,7 @@ play_level_intro_text::
     call screen_on
 
     call get_current_level_info_address ; in hl
-    ld bc, SCENE_INTRO_DIALOG
+    ld bc, LEVEL_INTRO_DIALOG
     add hl, bc
     ld a, [hl+]
     ld l, [hl]
@@ -555,7 +560,7 @@ init_background_music::
     ld [$FF25], a
 
     call get_current_level_info_address ; in hl
-    ld bc, SCENE_MUSIC
+    ld bc, LEVEL_MUSIC
     add hl, bc
     ld a, [hl+]
     ld l, [hl]

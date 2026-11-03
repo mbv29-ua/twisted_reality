@@ -1,5 +1,5 @@
 include "hardware.inc"
-INCLUDE "assets/sounds/music/hUGE.inc"
+INCLUDE "system/sound_manager/hUGE.inc"
 
 MACRO add_a_to_r16
     add LOW(\1)
@@ -1893,4 +1893,4 @@ ENDC
     ret
 
 note_table:
-INCLUDE "assets/sounds/music/hUGE_note_table.inc"
+INCLUDE "system/sound_manager/hUGE_note_table.inc"

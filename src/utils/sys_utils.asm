@@ -1,5 +1,5 @@
 INCLUDE "constants.inc"
-INCLUDE "tiles.inc"
+INCLUDE "assets/tiles/tiles.inc"
 INCLUDE "system/text_manager/text_manager_constants.inc"
 SECTION "System utils", ROM0
 
@@ -362,12 +362,12 @@ load_fonts::
 ;; WARNING: Destroys BC, DE and HL.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-load_heart_tiles::
-    ; Cargar corazón completo en tile $60
-    ld hl, hud_tiles.heart_full
-    ld de, VRAM0_START + TILE_HEART_FULL * TILE_SIZE
-    ld  b, hud_tiles.hearts_end-hud_tiles.heart_full
-    call memcpy_256
+;load_heart_tiles::
+;    ; Cargar corazón completo en tile $60
+;    ld hl, hud_tiles.heart_full
+;    ld de, VRAM0_START + TILE_HEART_FULL * TILE_SIZE
+;    ld  b, hud_tiles.hearts_end-hud_tiles.heart_full
+;    call memcpy_256
 
     ; Cargar medio corazón en tile $61
     ;ld hl, fonts.heart_half
@@ -375,15 +375,15 @@ load_heart_tiles::
     ;ld  b, TILE_SIZE
     ;call memcpy_256
 
-    ret
+;    ret
 
-load_ambar_tile::
-    ; Cargar corazón completo en tile $D0
-    ld hl, ambar.start
-    ld de, VRAM0_START + TILE_AHMBAR_HUD * TILE_SIZE
-    ld  b, TILE_SIZE
-    call memcpy_256
-    ret
+;load_ambar_tile::
+;    ; Cargar corazón completo en tile $D0
+;    ld hl, ambar.start
+;    ld de, VRAM0_START + TILE_AHMBAR_HUD * TILE_SIZE
+;    ld  b, TILE_SIZE
+;    call memcpy_256
+;    ret
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

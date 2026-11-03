@@ -24,6 +24,7 @@
 
 ; Start of tile array.
 world_1_tiles::
+.start:
 DB $00,$FF,$00,$FF,$00,$FF,$00,$FF
 DB $00,$FF,$00,$FF,$00,$FF,$00,$FF
 DB $00,$FF,$00,$E3,$00,$C1,$7F,$80
@@ -280,5 +281,5 @@ DB $E0,$FF,$9C,$1F,$E3,$03,$FC,$1F
 DB $E0,$FF,$9C,$1F,$E3,$03,$FC,$1F
 DB $22,$FF,$22,$FF,$55,$DD,$55,$DD
 DB $55,$DD,$BB,$88,$BB,$88,$FF,$88
-
+.end:
 ; End of WORLD_1_TILES.Z80
