@@ -20,15 +20,16 @@ SECTION "Level manager", ROM0
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 load_level::
-    call current_level_info_address
+    call save_current_level_info_address
     call play_level_intro_text
 
     ; Turn off the screen
     call screen_off
 
     ; Clean routines
-    call clean_OAM
+    call clean_OAM    
     call copy_DMA_routine
+    
     call man_entity_init
 
     ; Load assets
@@ -44,6 +45,7 @@ load_level::
     ;call load_darkfrog_tiles
     ;call load_desintegration_tiles
 
+    call load_characters_tiles
     call load_tileset
     call load_level_map
     call set_initial_scroll
@@ -69,7 +71,7 @@ load_level::
     call enable_vblank_interrupts
     call screen_bg_on
     call screen_obj_on
-    call screen_hud_on
+    ;call screen_hud_on
     call screen_window_dialog
     call screen_on
 ret
@@ -114,6 +116,25 @@ get_current_level_info_address::
     ld a, [hl+]
     ld l, [hl]
     ld h, a
+    ret
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; This routine loads the characters tiles in the 
+;; VRAM.
+;;
+;; INPUT
+;;      -
+;; OUTPUT:
+;;      -
+;; WARNING: Destroys A, BC, DE and HL
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+load_characters_tiles::
+    ld hl, characters
+    ld de, VRAM0_START + 4 * TILE_SIZE
+    ld bc, characters.end - characters.start
+    call memcpy_65536
     ret
 
 
@@ -534,6 +555,8 @@ play_level_intro_text::
     di
     call helper_call_hl
     ei
+
+    call init_palettes_by_default
     ret
 
 
@@ -584,13 +607,9 @@ stop_background_music::
     call wait_vblank
     
     ld a, $00
-    ld [$FF26], a
-
-    ld a, $00
     ld [$FF24], a
-
-    ld a, $00
     ld [$FF25], a
+    ld [$FF26], a
 
     ld hl, empty_song
     call hUGE_init

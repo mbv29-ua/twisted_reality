@@ -5,7 +5,7 @@ SECTION "Level 1", ROM0
 level_1::
 
 .level_number:			DB 		1						; LEVEL_NUMBER
-.intro_scene:			DW_BE	level_1_intro_text  	; LEVEL_INTRO_DIALOG
+.intro_scene:			DW_BE	level_1_intro_text_write	; LEVEL_INTRO_DIALOG
 .tileset:				DW_BE 	world_1_tiles 			; LEVEL_TILESET ; Se almacen como HIGH/LOW
 .tilset_size:			DW_BE 	(world_1_tiles.end-world_1_tiles.start)		; LEVEL_TILESET_SIZE ; Se almacen como HIGH/LOW
 .tileset_offset:		DW_BE 	128 * TILE_SIZE			; LEVEL_TILESET_OFFSET ; Se almacen como HIGH/LOW

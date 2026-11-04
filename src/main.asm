@@ -21,9 +21,14 @@
 SECTION "Entry point", ROM0[$150]
 
 main::
-	call start_game
+	;call start_game
 
 .main_loop:
+	;; Render
+    call scroll_manager
+	
 
-	di     ;; Disable Interrupts
+	;; Update entities 
+	call read_pad
 	halt   ;; Halt the CPU (stop procesing here)
+	jp .main_loop

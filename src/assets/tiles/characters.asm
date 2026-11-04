@@ -24,6 +24,7 @@
 
 ; Start of tile array.
 characters::
+.start:
 DB $0F,$FF,$10,$F0,$21,$E1,$27,$E7
 DB $2F,$E8,$2D,$E8,$27,$E7,$10,$F0
 DB $1F,$FF,$37,$F0,$70,$F0,$F3,$90
@@ -104,5 +105,6 @@ DB $00,$FF,$00,$FF,$00,$FF,$00,$FF
 DB $E0,$FF,$C0,$C0,$E0,$E1,$FC,$FF
 DB $FC,$FF,$FC,$FF,$F8,$FF,$F0,$FF
 DB $28,$FF,$94,$FF,$00,$FF,$00,$FF
+.end:
 
 ; End of CHARACTERS.Z80
