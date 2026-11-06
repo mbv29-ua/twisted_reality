@@ -1,0 +1,18 @@
+DEF TILE_GROUP_MASK				EQU %01110000
+
+DEF NO_SOLID_TILE 			 	EQU $00 ;   0 -  15
+DEF NO_SOLID_TILE_2			 	EQU $10 ;  16 -  31
+
+DEF SOLID_TILE 	  			 	EQU $20 ;  32 -  47
+DEF SOLID_TILE_2	 		 	EQU $30 ;  48 -  63
+
+DEF PLATFORM_TILE 			 	EQU $40 ;  64 -  79
+DEF WALK_BEHIND_TILE 			EQU $50 ;  80 -  95
+DEF COLLECTIBLE_TILE			EQU $60 ;  96 - 111
+DEF DEADLY_TILE	 				EQU $70 ; 112 - 127
+
+DEF EMPTY_TILE 			        EQU $80 ;  tile $00 of the second bank -> $80
+DEF DIAMOND_TILE 			    EQU $E0 ;  tile $90 of the second bank -> $E0
+DEF BULLETBOX_TILE              EQU $D9 ;  tile $89 of the second bank -> $D9
+DEF VORTEX_TILE_1               EQU $D0
+DEF VORTEX_TILE_2               EQU $D1
